@@ -49,6 +49,8 @@ export class QueryComponent implements OnInit{
 
   baseUrl: string = environment.BASE_URL;
 
+  isLoading: boolean = false;
+
   constructor(private httpClient: HttpClient, public snackBar: MatSnackBar, public sharedService: SharedService) {
     // fetch queries from queries.json to display in the "Sample Queries" dropdown
     this.httpClient.get<any>('assets/json/queries.json').subscribe((res) => {
@@ -69,12 +71,16 @@ export class QueryComponent implements OnInit{
   processQuery() {
     // we don't want to make API calls when the query textbox is empty/only has spaces
     if (this.str.replaceAll(" ", "") != "") {
+      this.isLoading = true;  // Start the loading spinner
+
       // @ts-ignore
       this.httpClient.post(this.baseUrl + "/query/" + this.queryType, this.str, {responseType: this.getOptions()}).subscribe(
         res => {
           this.displayQueryResponse(res);
+          this.isLoading = false;  // Stop the loading spinner
         },
         error => {
+          this.isLoading = false;  // Stop the loading spinner on error
           // response 400 is returned when the given query and the selected queryType do not match
           // response 500 is returned when there are syntactical errors in the given query
           let errorMessage;

@@ -8,7 +8,7 @@
       <mat-label>Sample Queries</mat-label>
       <!--populate the queries from queries.json-->
       <mat-select [formControl]="queriesControl" [(value)]="selectedQuery" (selectionChange)="selectQueryFromDropdown()">
-          <mat-option *ngFor="let queryData of queryList" [value]="queryData">{{queryData.question}}</mat-option>
+        <mat-option *ngFor="let queryData of queryList" [value]="queryData">{{queryData.question}}</mat-option>
       </mat-select>
     </mat-form-field>
   </div>
@@ -28,7 +28,7 @@
     rows="10"
     cdkTextareaAutosize
     cdkAutosizeMaxRows="40"
-  (ngModelChange)="queriesControl.reset();">
+    (ngModelChange)="queriesControl.reset();">
   </textarea>
 
   <div class="buttonRow">
@@ -36,6 +36,9 @@
     <button mat-raised-button (click)="clear()">Clear</button>
     <button mat-raised-button [cdkCopyToClipboard]="str">Copy Query</button>
   </div>
+
+  <!-- Loading spinner overlay -->
+  <app-loading [isLoading]="isLoading"></app-loading>
 
   <div class="results" *ngIf="queryType=='select'">
     <p *ngIf="dataSource != undefined">{{dataSource.length}} results found.</p>
@@ -52,17 +55,16 @@
       </tbody>
     </table>
   </div>
+
   <div class="results" *ngIf="queryType=='ask' && askQueryResponse != undefined">
     <p>The answer is: {{askQueryResponse}}.</p>
   </div>
 
-  <!--todo: pretty-print XML-->
   <div class="results" *ngIf="queryType=='construct' && constructQueryResponse != undefined">
     <p>See response below:</p>
     <pre style="padding-left: 5%">{{constructQueryResponse | xml}}</pre>
   </div>
 
-  <!--todo: pretty-print XML-->
   <div class="results" *ngIf="queryType=='describe' && describeQueryResponse != undefined">
     <p>See response below:</p>
     <pre style="padding-left: 5%">{{describeQueryResponse | xml}}</pre>

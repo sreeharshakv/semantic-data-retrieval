@@ -19,6 +19,8 @@ import {MatSelectModule} from "@angular/material/select";
 import {BrowserAnimationsModule} from "@angular/platform-browser/animations";
 import {MatButtonToggleModule} from "@angular/material/button-toggle";
 import {MatSnackBarModule} from "@angular/material/snack-bar";
+import { LoadingComponent } from './loading/loading.component';
+import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 
 @NgModule({
   declarations: [
@@ -28,7 +30,8 @@ import {MatSnackBarModule} from "@angular/material/snack-bar";
     AboutComponent,
     ManageDatasetComponent,
     QueryComponent,
-    XmlPipe
+    XmlPipe,
+    LoadingComponent
   ],
   imports: [
     BrowserModule,
@@ -44,7 +47,8 @@ import {MatSnackBarModule} from "@angular/material/snack-bar";
     ReactiveFormsModule,
     BrowserAnimationsModule,
     MatButtonToggleModule,
-    MatSnackBarModule
+    MatSnackBarModule,
+    MatProgressSpinnerModule
   ],
   providers: [],
   bootstrap: [AppComponent]
