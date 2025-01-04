@@ -2,6 +2,8 @@
 
 This repository contains the front-end of the search system built with Angular. It interacts with the [Spring Boot microservice](https://github.com/sreeharshakv/semantic-data-retrieval-backend) to retrieve and display data from semantic datasets.
 
+Try out the live application here: https://semantic-data-retrieval.vercel.app/home
+
 ## Technologies
 
 - Angular
